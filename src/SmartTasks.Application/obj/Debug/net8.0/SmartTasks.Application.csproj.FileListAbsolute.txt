@@ -1,0 +1,12 @@
+D:\Projects\SmartTasks\src\SmartTasks.Application\bin\Debug\net8.0\SmartTasks.Application.deps.json
+D:\Projects\SmartTasks\src\SmartTasks.Application\bin\Debug\net8.0\SmartTasks.Application.dll
+D:\Projects\SmartTasks\src\SmartTasks.Application\bin\Debug\net8.0\SmartTasks.Application.pdb
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\SmartTasks.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\SmartTasks.Application.AssemblyInfoInputs.cache
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\SmartTasks.Application.AssemblyInfo.cs
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\SmartTasks.Application.csproj.CoreCompileInputs.cache
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\SmartTasks.Application.sourcelink.json
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\SmartTasks.Application.dll
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\refint\SmartTasks.Application.dll
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\SmartTasks.Application.pdb
+D:\Projects\SmartTasks\src\SmartTasks.Application\obj\Debug\net8.0\ref\SmartTasks.Application.dll

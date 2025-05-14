@@ -1,17 +1,60 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.API", "src\SmartTasks.API\SmartTasks.API.csproj", "{GUID-API}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Application", "src\SmartTasks.Application\SmartTasks.Application.csproj", "{GUID-APP}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Domain", "src\SmartTasks.Domain\SmartTasks.Domain.csproj", "{GUID-DOMAIN}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Infrastructure", "src\SmartTasks.Infrastructure\SmartTasks.Infrastructure.csproj", "{GUID-INFRA}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Persistence", "src\SmartTasks.Persistence\SmartTasks.Persistence.csproj", "{GUID-PERSIST}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Tests.Unit", "tests\SmartTasks.Tests.Unit\SmartTasks.Tests.Unit.csproj", "{GUID-TESTUNIT}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Tests.Integration", "tests\SmartTasks.Tests.Integration\SmartTasks.Tests.Integration.csproj", "{GUID-TESTINT}"
+VisualStudioVersion = 17.14.36109.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Application", "src\SmartTasks.Application\SmartTasks.Application.csproj", "{B1F0F4A7-1825-4AC6-8747-225B584D33BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Domain", "src\SmartTasks.Domain\SmartTasks.Domain.csproj", "{D152710A-C9D2-48D7-966B-3FFB871FE1C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Infrastructure", "src\SmartTasks.Infrastructure\SmartTasks.Infrastructure.csproj", "{29208327-B7C3-4D28-B341-5BCC026A2AA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Persistence", "src\SmartTasks.Persistence\SmartTasks.Persistence.csproj", "{E9FE24E8-9CB4-43C8-BC6B-F6692C5FCA26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Tests.Unit", "tests\SmartTasks.Tests.Unit\SmartTasks.Tests.Unit.csproj", "{9BD78771-FA09-4BC2-AAC1-8DEEBBAC5C68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Tests.Integration", "tests\SmartTasks.Tests.Integration\SmartTasks.Tests.Integration.csproj", "{24869CED-C03A-4F6F-AC06-D9BAA44E90A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.API", "src\SmartTasks.API\SmartTasks.API.csproj", "{B3131FCC-D2E1-4C4F-9C5E-12F3A6735419}"
 EndProject
 Global
-    GlobalSection(SolutionConfigurationPlatforms) = preSolution
-        Debug|Any CPU = Debug|Any CPU
-        Release|Any CPU = Release|Any CPU
-    EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1F0F4A7-1825-4AC6-8747-225B584D33BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F0F4A7-1825-4AC6-8747-225B584D33BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F0F4A7-1825-4AC6-8747-225B584D33BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F0F4A7-1825-4AC6-8747-225B584D33BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D152710A-C9D2-48D7-966B-3FFB871FE1C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D152710A-C9D2-48D7-966B-3FFB871FE1C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D152710A-C9D2-48D7-966B-3FFB871FE1C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D152710A-C9D2-48D7-966B-3FFB871FE1C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29208327-B7C3-4D28-B341-5BCC026A2AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29208327-B7C3-4D28-B341-5BCC026A2AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29208327-B7C3-4D28-B341-5BCC026A2AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29208327-B7C3-4D28-B341-5BCC026A2AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9FE24E8-9CB4-43C8-BC6B-F6692C5FCA26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9FE24E8-9CB4-43C8-BC6B-F6692C5FCA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9FE24E8-9CB4-43C8-BC6B-F6692C5FCA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9FE24E8-9CB4-43C8-BC6B-F6692C5FCA26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BD78771-FA09-4BC2-AAC1-8DEEBBAC5C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BD78771-FA09-4BC2-AAC1-8DEEBBAC5C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BD78771-FA09-4BC2-AAC1-8DEEBBAC5C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BD78771-FA09-4BC2-AAC1-8DEEBBAC5C68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24869CED-C03A-4F6F-AC06-D9BAA44E90A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24869CED-C03A-4F6F-AC06-D9BAA44E90A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24869CED-C03A-4F6F-AC06-D9BAA44E90A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24869CED-C03A-4F6F-AC06-D9BAA44E90A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3131FCC-D2E1-4C4F-9C5E-12F3A6735419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3131FCC-D2E1-4C4F-9C5E-12F3A6735419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3131FCC-D2E1-4C4F-9C5E-12F3A6735419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3131FCC-D2E1-4C4F-9C5E-12F3A6735419}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB8B6A83-F2FF-4223-94B8-6B59D21F258B}
+	EndGlobalSection
 EndGlobal
