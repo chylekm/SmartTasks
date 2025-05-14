@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.API", "src\SmartTasks.API\SmartTasks.API.csproj", "{GUID-API}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Application", "src\SmartTasks.Application\SmartTasks.Application.csproj", "{GUID-APP}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Domain", "src\SmartTasks.Domain\SmartTasks.Domain.csproj", "{GUID-DOMAIN}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Infrastructure", "src\SmartTasks.Infrastructure\SmartTasks.Infrastructure.csproj", "{GUID-INFRA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Persistence", "src\SmartTasks.Persistence\SmartTasks.Persistence.csproj", "{GUID-PERSIST}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Tests.Unit", "tests\SmartTasks.Tests.Unit\SmartTasks.Tests.Unit.csproj", "{GUID-TESTUNIT}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTasks.Tests.Integration", "tests\SmartTasks.Tests.Integration\SmartTasks.Tests.Integration.csproj", "{GUID-TESTINT}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+EndGlobal
