@@ -1,3 +1,8 @@
+using SmartTasks.Infrastructure.Mongo.Audit;
+using SmartTasks.Infrastructure.Mongo.Configuration;
+using SmartTasks.Persistence;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddPersistence(builder.Configuration);
+builder.Services.Configure<MongoSettings>(
+    builder.Configuration.GetSection("MongoSettings"));
+
+builder.Services.AddSingleton<IAuditLogService, AuditLogService>();
 
 var app = builder.Build();
 

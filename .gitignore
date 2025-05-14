@@ -1,0 +1,20 @@
+# Visual Studio / Rider
+.vs/
+*.user
+*.suo
+.idea/
+
+# Build output
+bin/
+obj/
+
+# Docker
+.env
+
+# Test results
+TestResults/
+*.log
+
+# System pliki
+.DS_Store
+Thumbs.db
