@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartTasks.Infrastructure.Mongo.Audit;
 
@@ -8,6 +8,11 @@ namespace SmartTasks.API.Controllers.Tests
     [ApiController]
     public class LogsTestController : ControllerBase
     {
+        /// <summary>
+        /// Logs test controller
+        /// </summary>
+        /// <returns>Logs.</returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost("log-test")]
         public async Task<IActionResult> LogTest([FromServices] IAuditLogService audit)
         {

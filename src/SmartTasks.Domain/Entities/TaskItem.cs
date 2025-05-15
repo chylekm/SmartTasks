@@ -1,5 +1,7 @@
-﻿namespace SmartTasks.Domain.Entities;
+﻿using TaskStatus = SmartTasks.Domain.Enums.TaskStatus;
 
+namespace SmartTasks.Domain.Entities;
+ 
 public class TaskItem
 {
     public Guid Id { get; set; }
@@ -8,11 +10,4 @@ public class TaskItem
     public DateTime CreatedAt { get; set; }
     public DateTime? DueDate { get; set; }
     public TaskStatus Status { get; set; }
-}
-
-public enum TaskStatus
-{
-    Pending,
-    InProgress,
-    Completed
 }
