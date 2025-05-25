@@ -1,5 +1,3 @@
-### 📁 Plik: .github/workflows/deploy.yml
-
 name: Deploy to Azure
 
 on:
@@ -14,6 +12,8 @@ jobs:
       AZURE_CONTAINER_REGISTRY: smarttasksacr.azurecr.io
       IMAGE_NAME: smarttasks-api
       RESOURCE_GROUP: smarttasks-rg
+      CONTAINER_APP_NAME: smarttasks-api
+      CONTAINER_APP_ENV: smarttasks-env
       BICEP_FILE_PATH: infrastructure/main.bicep
 
     steps:
@@ -56,3 +56,10 @@ jobs:
           az deployment group create \
             --resource-group ${{ env.RESOURCE_GROUP }} \
             --template-file ${{ env.BICEP_FILE_PATH }}
+
+      - name: Update Container App to use latest image
+        run: |
+          az containerapp update \
+            --name ${{ env.CONTAINER_APP_NAME }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest

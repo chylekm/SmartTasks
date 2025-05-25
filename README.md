@@ -1,118 +1,90 @@
-# 🧠 SmartTasks – Modular .NET 9 Backend Template
+# 🚀 SmartTasks – Project Summary
 
-SmartTasks is a modern backend application in the **Task Manager** domain, designed to:
-- manage tasks (CRUD, filter, priorities),
-- integrate with AI,
-- audit operations using MongoDB,
-- and serve as a reusable backend template for future .NET projects.
+## Demo 
+https://smarttasks-api.greenglacier-3bbc9f6f.westeurope.azurecontainerapps.io/
 
----
+## 🎯 Project Purpose
 
-## 🚀 Features
+SmartTasks is a modern backend task manager application designed to fulfill several core objectives:
 
-- ✅ JWT-based user registration and login
-- ✅ Create, update, delete and filter tasks
-- ✅ CQRS with MediatR + FluentValidation
-- ✅ Centralized error handling with Result/Error + Middleware
-- ✅ MongoDB operation audit trail (planned)
-- ✅ Ready for CI/CD, Docker, Azure deployment
+1. **Task management**: add, edit, delete, filter, and prioritize tasks.
+2. **User authentication and authorization** with JWT and roles.
+3. **AI integration** (planned): generate task suggestions, subtasks, and analyze priorities.
+4. **Audit logging to MongoDB**: track who did what and when.
+5. **Template for .NET projects** following clean architecture, DevOps, and security best practices.
 
----
+## 🧱 Architecture
 
-## 🧱 Solution Structure
+- Clean Architecture (layers: API, Application, Domain, Infrastructure, Persistence)
+- CQRS + MediatR + FluentValidation
+- MongoDB (Cosmos DB with Mongo API)
+- SQL Server as relational storage
+- JWT authentication
+- Audit logging via AuditLogService
 
-```
-SmartTasks.API/               ← entry point (Web API)
-SmartTasks.Application/       ← application logic (CQRS, DTOs, validation)
-SmartTasks.Domain/            ← domain entities, enums, value objects
-SmartTasks.Infrastructure/    ← JWT, Mongo, AI, external services
-SmartTasks.Persistence/       ← EF Core + SQL Server + repositories
-SmartTasks.Tests.Unit/        ← unit tests
-SmartTasks.Tests.Integration/ ← integration tests
-```
+## ⚙️ Technologies & Tools
 
----
+### Backend
 
-## 📦 Technologies
+- .NET 8 Web API (C#)
+- Entity Framework Core (SQL)
+- MongoDB Driver (Cosmos DB)
+- FluentValidation, MediatR, xUnit
 
-- .NET 9 + C# 13 (preview)
-- Clean Architecture
-- MediatR (CQRS, pipeline behaviors)
-- FluentValidation
-- Entity Framework Core 9
-- SQL Server (relational DB)
-- MongoDB (audit logs, NoSQL)
-- JWT Authentication + Role-based access
-- Swagger + Bearer Token
-- Docker + Docker Compose
-- Result/Error pattern + ExceptionMiddleware
-- Unit of Work + Repository Pattern
+### DevOps & Cloud
 
----
+- Azure Container Apps (hosting)
+- Azure Container Registry (Docker image storage)
+- Azure SQL Database
+- Azure Cosmos DB (Mongo API)
+- Azure Key Vault (connection string storage)
+- GitHub Actions (CI/CD automation)
+- Docker + Dockerfile
+- Bicep (Infrastructure as Code)
 
-## ✅ Current Features
+## 🔐 Security
 
-| Area                        | Status     |
-|----------------------------|------------|
-| Architecture               | ✅ Clean Architecture (5-layered) |
-| CQRS with MediatR          | ✅ `CreateTaskHandler`, pipeline validation |
-| FluentValidation           | ✅ Integrated via pipeline |
-| SQL Server + EF Core 9     | ✅ Configured and Docker-ready |
-| MongoDB                    | ✅ Connected and audit-ready |
-| JWT + Swagger              | ✅ Auth works with Swagger |
-| Error Handling             | ✅ Middleware + Result/Error |
-| Docker                     | ✅ Dockerfile + docker-compose.yml |
-| Unit of Work               | ✅ Implemented with EF |
-| Dependency Injection       | ✅ Using `AddMediatR(typeof(...).Assembly)` |
+- JWT Bearer Authentication
+- Secrets stored in Azure Key Vault
+- Managed Identity for secure Container App ↔ Key Vault access
+- Swagger with JWT authorization
 
----
+## 🚀 CI/CD (GitHub Actions)
 
-## 🛠️ CQRS Example (Tasks)
+- Auto-deploy on push to `main`
+- Build & test .NET project
+- Build and push Docker image to ACR
+- Infrastructure deployment via Bicep
+- Automatic Azure Container App image update
 
-```
-SmartTasks.Application/
-└── Tasks/
-    └── Commands/
-        └── CreateTask/
-            ├── CreateTaskCommand.cs
-            ├── CreateTaskHandler.cs
-            └── CreateTaskValidator.cs
-```
+## 🗃️ Databases
 
----
+- **SQL Server**: provisioned automatically via Bicep
+- **MongoDB (Cosmos DB)**:
+  - Manually created on Free Tier (RU-based OLTP)
+  - Connection string stored as `MongoConnectionString` in Key Vault
+  - Uses port 10255 with SSL, retrywrites=false
 
-## 🧩 Planned Extensions
+## 🧪 Testing
 
-- Queries: `GetTaskById`, `GetAllTasks`
-- Mongo audit log (event sourcing)
-- Unit tests for handlers and validators (xUnit + Moq/FakeItEasy)
-- Integration tests (SQLite InMemory / TestContainers)
-- Health checks (`/health`)
-- Email registration confirmation
-- Queues (Azure Queue / RabbitMQ)
-- AI for task and subtask generation
-- OpenAPI client + endpoint documentation
-- CI/CD with GitHub Actions / Azure Pipelines
-- Admin panel (Blazor or SPA)
+- Unit tests (xUnit)
+- Automatically executed in CI (GitHub Actions)
+
+## 🛠️ Debugging & Maintenance
+
+- Port 80 configured for Azure Container Apps (via Dockerfile and Kestrel)
+- `/` endpoint redirects to `/swagger`
+- Auto-configured Swagger UI
+- Logs accessible via `az containerapp logs show`
+
+## ✅ Final Status
+
+- Application deployed and running in Azure (Container App)
+- Full CI/CD pipeline in GitHub Actions
+- Public API with Swagger documentation
+- Secure connections to MongoDB and SQL via Key Vault
+- Project ready for UI integration, monitoring, alerting, or microservice expansion
 
 ---
 
-## ▶️ Run locally (Docker)
-
-```bash
-docker-compose up --build
-```
-
----
-
-## 🚫 License
-
-This project is **strictly proprietary**.  
-You are **not allowed** to copy, use, distribute, or modify any part of this codebase without explicit written permission from the author.
-
----
-
-## 📫 Contact
-
-This project is a base architecture for personal and professional use cases.  
-For questions, reach out via GitHub Issues.
+Want me to generate a development roadmap, add a frontend (e.g. Angular), or implement AI integration?

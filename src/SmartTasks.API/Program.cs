@@ -5,11 +5,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartTasks.API.Middleware;
 using SmartTasks.Application.Common.Behaviors;
+using SmartTasks.Application.Interfaces;
 using SmartTasks.Application.Tasks.Commands.CreateTask;
 using SmartTasks.Infrastructure.Mongo.Audit;
 using SmartTasks.Infrastructure.Mongo.Configuration;
 using SmartTasks.Infrastructure.Security;
 using SmartTasks.Persistence;
+using SmartTasks.Persistence.Repositories;
 using System.Reflection;
 using System.Text;
 
@@ -90,8 +92,19 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateTaskValidator).Assembly)
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-
 builder.Services.AddSingleton<IAuditLogService, AuditLogService>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+
+if (builder.Environment.IsProduction())
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(80); // Azure Container App
+    });
+}
 
 var app = builder.Build();
 
@@ -109,9 +122,11 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.MapControllers();
+
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
