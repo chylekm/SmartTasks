@@ -1,0 +1,116 @@
+param location string = resourceGroup().location
+param environment string = 'dev'
+
+ Nazwy zasobów
+var acrName = 'smarttasksacr'
+var containerAppName = 'smarttasksapp'
+var containerAppEnvName = 'smarttaskscae'
+var sqlServerName = 'smarttaskssql${uniqueString(resourceGroup().id)}'
+var sqlDbName = 'SmartTasksDb'
+var mongoAccountName = 'smarttasksmongo${uniqueString(resourceGroup().id)}'
+
+ Azure Container Registry
+resource acr 'Microsoft.ContainerRegistryregistries@2023-01-01-preview' = {
+  name acrName
+  location location
+  sku {
+    name 'Basic'
+  }
+  properties {
+    adminUserEnabled true
+  }
+}
+
+ SQL Server
+resource sqlServer 'Microsoft.Sqlservers@2022-11-01' = {
+  name sqlServerName
+  location location
+  properties {
+    administratorLogin 'sqladmin'
+    administratorLoginPassword 'P@ssw0rd123!'  Zamień w wersji prod na sekrety
+  }
+}
+
+ SQL Database
+resource sqlDb 'Microsoft.Sqlserversdatabases@2022-11-01' = {
+  parent sqlServer
+  name sqlDbName
+  properties {
+    collation 'SQL_Latin1_General_CP1_CI_AS'
+    maxSizeBytes 2147483648
+  }
+  sku {
+    name 'Basic'
+    tier 'Basic'
+  }
+}
+
+ MongoDB (CosmosDB z API MongoDB)
+resource mongoAccount 'Microsoft.DocumentDBdatabaseAccounts@2023-04-15' = {
+  name mongoAccountName
+  location location
+  kind 'MongoDB'
+  properties {
+    databaseAccountOfferType 'Standard'
+    locations [
+      {
+        locationName location
+        failoverPriority 0
+        isZoneRedundant false
+      }
+    ]
+    apiProperties {
+      serverVersion '4.2'
+    }
+  }
+}
+
+ Container App Environment
+resource containerAppEnv 'Microsoft.AppmanagedEnvironments@2023-05-01' = {
+  name containerAppEnvName
+  location location
+  properties {
+    daprAIInstrumentationKey ''
+  }
+}
+
+ Container App
+resource containerApp 'Microsoft.AppcontainerApps@2023-05-01' = {
+  name containerAppName
+  location location
+  properties {
+    managedEnvironmentId containerAppEnv.id
+    configuration {
+      ingress {
+        external true
+        targetPort 80
+        transport 'auto'
+      }
+      registries [
+        {
+          server acr.properties.loginServer
+          username acr.listCredentials().username
+          password acr.listCredentials().passwords[0].value
+        }
+      ]
+    }
+    template {
+      containers [
+        {
+          name 'smarttasks'
+          image '${acr.properties.loginServer}smarttaskslatest'
+          env [
+            {
+              name 'ConnectionStrings__SqlDb'
+              value 'Server=${sqlServer.name}.database.windows.net;Database=${sqlDb.name};User Id=sqladmin;Password=P@ssw0rd123!'
+            }
+            {
+              name 'ConnectionStrings__MongoDb'
+              value 'mongodb${mongoAccount.name}.documents.azure.com10255ssl=true'
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
