@@ -1,0 +1,62 @@
+name: Deploy React UI to Azure
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ui/**'
+      - '.github/workflows/deploy-ui.yml'
+
+jobs:
+  deploy-ui:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CONTAINER_REGISTRY: smarttasksacr.azurecr.io
+      IMAGE_NAME: smarttasks-ui
+      RESOURCE_GROUP: smarttasks-rg
+      CONTAINER_APP_NAME: smarttasks-ui
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Enable Corepack and install deps
+        run: |
+          corepack enable
+          pnpm install
+        working-directory: ui
+
+      - name: Build UI
+        run: pnpm build
+        working-directory: ui
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest ./ui
+          docker push ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Deploy to Azure Container App
+        run: |
+          az containerapp update \
+            --name ${{ env.CONTAINER_APP_NAME }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --image ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
