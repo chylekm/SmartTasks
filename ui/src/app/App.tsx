@@ -1,9 +1,11 @@
+import { RouterProvider } from "react-router-dom";
 import { AuthProvider } from "../shared/auth/AuthProvider";
+import { router } from "./routes";
 
 export default function App() {
   return (
     <AuthProvider>
-      <h1 className="text-2xl font-bold text-blue-600">Hello from SmartTasks UI</h1>
+      <RouterProvider router={router} />
     </AuthProvider>
   );
 }

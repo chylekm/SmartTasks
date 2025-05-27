@@ -4,22 +4,27 @@ import Register from "../features/auth/Register";
 import Dashboard from "../shared/components/Dashboard";
 import AdminPanel from "../shared/components/AdminPanel";
 import AccessDenied from "../shared/components/AccessDenied";
-import { PrivateRoute } from "../app/PrivateRoute";
+import { PrivateRoute } from "../shared/components/PrivateRoute";
 import { AdminRoute } from "../shared/components/AdminRoute";
-import Layout from "../shared/components/Layout";
-import NotFound from "../shared/components/NotFound";
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/access-denied", element: <AccessDenied /> },
   {
-    element: <PrivateRoute><Layout /></PrivateRoute>,
-    children: [
-      { path: "/dashboard", element: <Dashboard /> },
-      { path: "/admin", element: <AdminRoute><AdminPanel /></AdminRoute> },
-      { path: "*", element: <NotFound /> } // <= to dodaj
-    ]
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
   },
-  { path: "*", element: <NotFound /> } // fallback poza Layoutem np. dla błędnych login/register
+  {
+    path: "/admin",
+    element: (
+      <AdminRoute>
+        <AdminPanel />
+      </AdminRoute>
+    ),
+  },
 ]);

@@ -21,3 +21,6 @@ Thumbs.db
 
 ui/node_modules/
 ui/dist/
+ui/.env.local
+
+ui/.env.production
