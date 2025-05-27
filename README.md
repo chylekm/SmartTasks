@@ -1,7 +1,8 @@
 # 🚀 SmartTasks – Project Summary
 
 ## Demo 
-https://smarttasks-api.greenglacier-3bbc9f6f.westeurope.azurecontainerapps.io/
+API: https://smarttasks-api.greenglacier-3bbc9f6f.westeurope.azurecontainerapps.io/
+UI: https://smarttasks-ui.greenglacier-3bbc9f6f.westeurope.azurecontainerapps.io/
 
 ## 🎯 Project Purpose
 
