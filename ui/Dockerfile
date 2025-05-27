@@ -2,7 +2,9 @@
 FROM node:20 AS builder
 WORKDIR /app
 COPY . .
-RUN corepack enable && pnpm install && pnpm build
+RUN npm install -g pnpm
+RUN pnpm install --frozen-lockfile
+RUN pnpm build
 
 # Serwowanie przez nginx
 FROM nginx:alpine
