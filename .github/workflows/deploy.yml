@@ -4,7 +4,14 @@ on:
   push:
     branches:
       - main
-
+    paths:
+      - 'src/**'
+      - 'infrastructure/**'
+      - 'tests/**'
+      - '.github/workflows/deploy.yml'
+      - '*.sln'
+      - 'docker-compose.yml'
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest

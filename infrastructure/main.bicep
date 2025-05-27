@@ -2,6 +2,7 @@ param location string = resourceGroup().location
 
 var acrName = 'smarttasksacr'
 var containerAppName = 'smarttasks-api'
+var containerAppUIName = 'smarttasks-ui'
 var containerAppEnvName = 'smarttasks-env'
 
 resource acr 'Microsoft.ContainerRegistry/registries@2023-01-01-preview' = {
@@ -78,6 +79,41 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
               value: '@Microsoft.KeyVault(SecretUri=https://smarttasks-kv.vault.azure.net/secrets/MongoConnectionString/)'
             }
           ]
+        }
+      ]
+    }
+  }
+}
+
+resource containerAppUI 'Microsoft.App/containerApps@2023-05-01' = {
+  name: containerAppUIName
+  location: location
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${containerAppIdentity.id}': {}
+    }
+  }
+  properties: {
+    managedEnvironmentId: containerAppEnv.id
+    configuration: {
+      ingress: {
+        external: true
+        targetPort: 80
+        transport: 'auto'
+      }
+      registries: [
+        {
+          server: acr.properties.loginServer
+          identity: containerAppIdentity.id
+        }
+      ]
+    }
+    template: {
+      containers: [
+        {
+          name: containerAppUIName
+          image: '${acr.properties.loginServer}/${containerAppUIName}:latest'
         }
       ]
     }
