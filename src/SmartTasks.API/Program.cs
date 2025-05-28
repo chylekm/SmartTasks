@@ -3,6 +3,7 @@ using FluentValidation;
 using MediatR;
 using MediatR.Registration;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartTasks.API.Middleware;
@@ -139,7 +140,7 @@ app.MapControllers();
 app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-
+ 
 await DbSeeder.SeedAllAsync(app.Services);
 
 app.Run();
