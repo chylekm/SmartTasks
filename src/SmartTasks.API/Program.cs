@@ -1,15 +1,18 @@
-﻿using FluentValidation;
+﻿using Azure.Identity;
+using FluentValidation;
 using MediatR;
 using MediatR.Registration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartTasks.API.Middleware;
 using SmartTasks.Application.Common.Behaviors;
 using SmartTasks.Application.Interfaces;
 using SmartTasks.Application.Tasks.Commands.CreateTask;
+using SmartTasks.Domain.Entities;
 using SmartTasks.Infrastructure.Mongo.Audit;
 using SmartTasks.Infrastructure.Mongo.Configuration;
-using SmartTasks.Infrastructure.Security;
+using SmartTasks.Infrastructure.Security.JWT;
 using SmartTasks.Persistence;
 using SmartTasks.Persistence.Repositories;
 using System.Reflection;
@@ -17,8 +20,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Configuration.AddAzureKeyVault(
+    new Uri($"https://smarttasks-kv.vault.azure.net/"),
+    new DefaultAzureCredential());
 
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -66,7 +72,11 @@ builder.Services.Configure<MongoSettings>(
     builder.Configuration.GetSection("MongoSettings"));
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -129,5 +139,7 @@ app.MapControllers();
 app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+await DbSeeder.SeedAllAsync(app.Services);
 
 app.Run();

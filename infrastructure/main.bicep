@@ -119,3 +119,28 @@ resource containerAppUI 'Microsoft.App/containerApps@2023-05-01' = {
     }
   }
 }
+
+resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
+  name: 'smarttasks-kv'
+}
+
+resource accessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2022-07-01' = {
+  name: '${keyVault.name}/add'
+  properties: {
+    accessPolicies: [
+      {
+        tenantId: subscription().tenantId
+        objectId: containerAppIdentity.properties.principalId
+        permissions: {
+          secrets: [
+            'get'
+          ]
+        }
+      }
+    ]
+  }
+  dependsOn: [
+    containerAppIdentity
+    keyVault
+  ]
+}

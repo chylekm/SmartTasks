@@ -4,13 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace SmartTasks.Infrastructure.Security;
+namespace SmartTasks.Infrastructure.Security.JWT;
 
-public class JwtTokenGenerator : IJwtTokenGenerator
+public class JwtService : IJwtService
 {
     private readonly JwtSettings _settings;
 
-    public JwtTokenGenerator(IOptions<JwtSettings> options)
+    public JwtService(IOptions<JwtSettings> options)
     {
         _settings = options.Value;
     }

@@ -1,4 +1,4 @@
-﻿namespace SmartTasks.Infrastructure.Security;
+﻿namespace SmartTasks.Infrastructure.Security.JWT;
 
 public class JwtSettings
 {
