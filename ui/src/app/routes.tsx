@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../features/auth/Login";
-import Register from "../features/auth/Register";
+import Login from "../features/auth/components/LoginForm";
+import RegisterForm from "../features/auth/components/RegisterForm";
 import Dashboard from "../shared/components/Dashboard";
 import AdminPanel from "../shared/components/AdminPanel";
 import AccessDenied from "../shared/components/AccessDenied";
@@ -11,7 +11,7 @@ import NotFound from "../shared/components/NotFound";
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
+  { path: "/register", element: <RegisterForm /> },
   { path: "/access-denied", element: <AccessDenied /> },
   {
     element: <PrivateRoute><Layout /></PrivateRoute>,

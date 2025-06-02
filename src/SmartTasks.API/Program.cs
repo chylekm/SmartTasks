@@ -68,6 +68,19 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); 
+    });
+});
+
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.Configure<MongoSettings>(
     builder.Configuration.GetSection("MongoSettings"));
@@ -128,6 +141,8 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "SmartTasks API v1");
 });
 //}
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 
