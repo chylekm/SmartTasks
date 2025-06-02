@@ -87,5 +87,3 @@ SmartTasks is a modern backend task manager application designed to fulfill seve
 - Project ready for UI integration, monitoring, alerting, or microservice expansion
 
 ---
-
-Want me to generate a development roadmap, add a frontend (e.g. Angular), or implement AI integration?
